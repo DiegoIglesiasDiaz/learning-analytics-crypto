@@ -55,9 +55,6 @@ if ejecutar:
             try:
                 df = pd.read_csv(archivo)
 
-                if usar_anonimizacion:
-                    df = anonimizar_nombres(df)
-
                 Path("keys").mkdir(exist_ok=True)
                 if not (Path("keys") / "fernet.key").exists():
                     clave_aes = generar_clave_aes()
@@ -66,9 +63,13 @@ if ejecutar:
                     clave_aes = cargar_clave_aes()
                     clave_priv, clave_pub = cargar_claves_rsa()
 
+                # Cifrar nombre real ANTES de anonimizar (mismo orden que main.py)
                 bc = Blockchain()
                 for _, fila in df.iterrows():
                     bc.agregar_bloque(cifrar_registro(fila, clave_aes), clave_privada=clave_priv)
+
+                if usar_anonimizacion:
+                    df = anonimizar_nombres(df)
 
                 df = etiquetar_riesgo(df)
                 if usar_ml:
