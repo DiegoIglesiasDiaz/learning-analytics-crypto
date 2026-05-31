@@ -30,6 +30,7 @@ learning-analytics-crypto/
 ├── output/                   # Imágenes PNG generadas (se crea automáticamente)
 ├── keys/                     # Claves criptográficas (excluido del repositorio)
 ├── app.py                    # Interfaz Streamlit (opcional)
+├── conftest.py               # Configuración global de pytest
 ├── requirements.txt
 └── README.md
 ```
@@ -72,11 +73,11 @@ El script ejecuta 10 pasos y finaliza con un resumen en consola:
 RESUMEN FINAL
   Estudiantes analizados:   30
   En riesgo (reglas):       10 (33%)
-  Calificación media:       72.0
+  Calificacion media:       72.0
   Bloques en blockchain:    31
-  Integridad blockchain:    ✓ ÍNTEGRA
-  Alteración detectada:     ✓ Detectada (correcto)
-  Gráficos generados:       3
+  Integridad blockchain:    INTEGRA
+  Alteracion detectada:     Detectada (correcto)
+  Graficos generados:       3
 ```
 
 ### Interfaz Streamlit (opcional)
@@ -202,11 +203,12 @@ Los umbrales de riesgo por defecto son:
 
 ## Dependencias principales
 
-| Librería | Versión mínima | Uso |
+| Librería | Versión | Uso |
 |---|---|---|
-| `pandas` | 2.0 | Manipulación de datos tabulares |
-| `cryptography` | 41.0 | AES (Fernet) y RSA |
-| `scikit-learn` | 1.3 | Regresión Logística, métricas |
-| `matplotlib` | 3.7 | Visualizaciones |
-| `pytest` | 7.4 | Tests unitarios |
-| `streamlit` | 1.28 | Interfaz web |
+| `pandas` | 3.0.3 | Manipulación de datos tabulares |
+| `numpy` | 2.4.6 | Operaciones numéricas |
+| `cryptography` | 48.0.0 | AES (Fernet) y RSA |
+| `scikit-learn` | 1.8.0 | Regresión Logística, métricas |
+| `matplotlib` | 3.10.9 | Visualizaciones |
+| `pytest` | 9.0.3 | Tests unitarios |
+| `streamlit` | 1.58.0 | Interfaz web |
