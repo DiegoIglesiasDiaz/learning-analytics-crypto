@@ -80,20 +80,22 @@ def main(ruta_csv: str = "data/estudiantes.csv", forzar_nuevas_claves: bool = Fa
     print("[PASO 1] Cargando datos educativos...")
     df = cargar_datos(ruta_csv)
 
-    print("\n[PASO 2] Anonimizando nombres (simulacion GDPR)...")
-    df = anonimizar_nombres(df)
-
-    print("\n[PASO 3] Preparando claves criptograficas...")
+    print("\n[PASO 2] Preparando claves criptograficas...")
     clave_aes, clave_privada, clave_publica = preparar_claves(forzar_nuevas_claves)
 
-    print("\n[PASO 4] Cifrando registros y registrando en blockchain...")
+    print("\n[PASO 3] Cifrando registros y registrando en blockchain...")
+    # Los nombres reales se cifran ANTES de anonimizar: solo alguien con
+    # la clave AES puede recuperarlos. El DataFrame se anonimiza despues.
     blockchain = Blockchain()
     for _, fila in df.iterrows():
         blockchain.agregar_bloque(cifrar_registro(fila, clave_aes), clave_privada=clave_privada)
     print(f"[OK] {len(df)} registros añadidos a la blockchain.")
+
+    print("\n[PASO 4] Anonimizando nombres (simulacion GDPR)...")
+    df = anonimizar_nombres(df)
     blockchain.imprimir_resumen()
 
-    print("[PASO 5] Verificando integridad de la blockchain...")
+    print("\n[PASO 5] Verificando integridad de la blockchain...")
     integra = blockchain.verificar_integridad(clave_publica=clave_publica)
     estado = "INTEGRA" if integra else "COMPROMETIDA"
 
