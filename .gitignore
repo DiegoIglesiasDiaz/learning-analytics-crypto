@@ -1,0 +1,23 @@
+# Claves criptográficas — NUNCA subir al repositorio
+keys/
+
+# Artefactos de Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Salidas generadas
+output/*.png
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
